@@ -1,3 +1,8 @@
+// raccolgo tutto il mio codice all'interno di una self invoking per evitare di entrare nello scope globale
+(function mySocialMedia() {
+
+// creo costante contenente l'array di oggetti di cui ho bisogno
+
 const posts = [
     {
         id: 1,
@@ -55,3 +60,78 @@ const posts = [
         created: "2021-03-05"
     }
 ];
+
+// mi creo ora una funzione per stampare la griglia dei post
+const containerElm = document.getElementById('container');
+
+function stampaPost(){
+posts.forEach((element)=>{
+    let postElm = document.createElement('div');
+    postElm.classList.add('post')
+    postElm.innerHTML = `
+    <div class="post__header">
+    <div class="post-meta">                    
+        <div class="post-meta__icon">
+            <img class="profile-pic" src="${element.author.image}" alt="Phil Mangione">                    
+        </div>
+        <div class="post-meta__data">
+            <div class="post-meta__author">${element.author.name}</div>
+            <div class="post-meta__time">${element.created}</div>
+        </div>                    
+    </div>
+</div>
+<div class="post__text">${element.content}</div>
+<div class="post__image">
+    <img src="${element.media}" alt="">
+</div>
+<div class="post__footer">
+    <div class="likes js-likes">
+        <div class="likes__cta">
+            <a class="like-button  js-like-button" href="#" data-postid="${element.id}">
+                <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                <span class="like-button__label">Mi Piace</span>
+            </a>
+        </div>
+        <div class="likes__counter">
+            Piace a <b id="like-counter-1" class="js-likes-counter">${element.likes}</b> persone
+        </div>
+    </div> 
+</div>           
+`
+containerElm.append(postElm);
+})
+};
+stampaPost(posts)
+/*
+<div class="post">
+    <div class="post__header">
+        <div class="post-meta">                    
+            <div class="post-meta__icon">
+                <img class="profile-pic" src="https://unsplash.it/300/300?image=15" alt="Phil Mangione">                    
+            </div>
+            <div class="post-meta__data">
+                <div class="post-meta__author">Phil Mangione</div>
+                <div class="post-meta__time">4 mesi fa</div>
+            </div>                    
+        </div>
+    </div>
+    <div class="post__text">Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.</div>
+    <div class="post__image">
+        <img src="https://unsplash.it/600/300?image=171" alt="">
+    </div>
+    <div class="post__footer">
+        <div class="likes js-likes">
+            <div class="likes__cta">
+                <a class="like-button  js-like-button" href="#" data-postid="1">
+                    <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                    <span class="like-button__label">Mi Piace</span>
+                </a>
+            </div>
+            <div class="likes__counter">
+                Piace a <b id="like-counter-1" class="js-likes-counter">80</b> persone
+            </div>
+        </div> 
+    </div>            
+</div>
+*/
+})();
