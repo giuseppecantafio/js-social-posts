@@ -93,7 +93,7 @@ posts.forEach((element)=>{
             </a>
         </div>
         <div class="likes__counter">
-            Piace a <b id="like-counter-1" class="js-likes-counter">${element.likes}</b> persone
+            Piace a <b id="like-counter-${element.id}" class="js-likes-counter">${element.likes}</b> persone
         </div>
     </div> 
 </div>           
@@ -106,11 +106,26 @@ stampaPost(posts)
 // vado a lavorare sul tasto mi piace e il counter like
 
 let likeUp = document.getElementsByClassName('like-button');
-console.log(likeUp)
 const clickUp = Array.from(likeUp).forEach((a)=> a.addEventListener('click', onClick));
-
 function onClick(clickUp){
+
     this.style.color = 'purple';
+    console.log(this)
+
+    let postId = this.querySelector('a[href]');
+    
+    console.log(postId);
+    let likeCounterId = document.getElementById(`like-counter-${posts[0].id}`);
+    console.log(likeCounterId)
+
+    console.log(clickUp);
 };
 
 })();
+
+// let likeCounterId = [];
+//     posts.forEach((i)=> {
+//         let likeCounterId = document.getElementById(`like-counter-${i.id}`);
+//         console.log(i.id);
+//         return likeCounterId;
+//     });
