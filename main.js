@@ -107,25 +107,30 @@ stampaPost(posts)
 
 let likeUp = document.getElementsByClassName('like-button');
 const clickUp = Array.from(likeUp).forEach((a)=> a.addEventListener('click', onClick));
-function onClick(clickUp){
 
+let idFromLikedArray = [];
+
+function onClick(){
     this.style.color = 'purple';
-    console.log(this)
 
-    let postId = this.querySelector('a[href]');
-    
+    let postId = this.getAttribute('data-postid');
     console.log(postId);
-    let likeCounterId = document.getElementById(`like-counter-${posts[0].id}`);
-    console.log(likeCounterId)
 
-    console.log(clickUp);
+    let likeCounterId = document.getElementById(`like-counter-${postId}`);
+     console.log(likeCounterId)
+    
+    let nLikes = posts[postId - 1].likes
+    console.log(nLikes);
+
+    function newLikes(){
+        nLikes++
+        console.log(nLikes)
+        likeCounterId.innerHTML = `<b id="like-counter-${postId}" class="js-likes-counter">${nLikes}</b>`
+        idFromLikedArray.push('Id post: ' + postId)
+        return idFromLikedArray;
+    }
+    newLikes();
+    console.log(idFromLikedArray)
 };
 
 })();
-
-// let likeCounterId = [];
-//     posts.forEach((i)=> {
-//         let likeCounterId = document.getElementById(`like-counter-${i.id}`);
-//         console.log(i.id);
-//         return likeCounterId;
-//     });
