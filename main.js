@@ -76,7 +76,7 @@ posts.forEach((element)=>{
         </div>
         <div class="post-meta__data">
             <div class="post-meta__author">${element.author.name}</div>
-            <div class="post-meta__time">${element.created}</div>
+            <div class="post-meta__time">${new Date(element.created).toLocaleDateString()}</div>
         </div>                    
     </div>
 </div>
@@ -110,7 +110,8 @@ const clickUp = Array.from(likeUp).forEach((a)=> a.addEventListener('click', onC
 
 let idFromLikedArray = [];
 
-function onClick(){
+function onClick(event){
+    event.preventDefault();
     this.style.color = 'purple';
 
     let postId = this.getAttribute('data-postid');
